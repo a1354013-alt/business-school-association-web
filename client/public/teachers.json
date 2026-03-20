@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "方誠",
+    "title": "副教授兼系主任",
+    "photo": "images/teachers/fangchen.jpg",
+    "phone": "7301、7315",
+    "email": "fangchen@mail.nou.edu.tw",
+    "expertise": ["國際經濟", "國際貿易", "國際金融", "數量方法"],
+    "bio": "方誠副教授為國立空中大學商學系系主任，專長於國際經濟與金融領域，致力於教學與研究。"
+  },
+  {
+    "id": 2,
+    "name": "廖珮妏",
+    "title": "副教授兼研究發展處校務發展組組長暨臺中中心組長",
+    "photo": "images/teachers/pearlliao.jpg",
+    "phone": "1404、7317",
+    "email": "pearlliao@mail.nou.edu.tw",
+    "expertise": ["人力資源管理與發展", "教育訓練", "組織行為", "職場經營"],
+    "bio": "廖珮妏副教授為臺中中心組長，專長於人力資源管理與組織發展，對職場經營有深入研究。"
+  },
+  {
+    "id": 3,
+    "name": "吳能惠",
+    "title": "助理教授兼金門中心主任",
+    "photo": "images/teachers/wnh.jpg",
+    "phone": "2501",
+    "email": "wnh@mail.nou.edu.tw",
+    "expertise": ["人力資源", "職場經營"],
+    "bio": "吳能惠助理教授兼金門中心主任，專長於人力資源與職場經營領域。"
+  },
+  {
+    "id": 4,
+    "name": "劉佳蒨",
+    "title": "助理教授兼秘書室公關及校友服務組組長",
+    "photo": "images/teachers/ccliu.jpg",
+    "phone": "5012、7318",
+    "email": "ccliu@mail.nou.edu.tw",
+    "expertise": ["網路社群行銷", "數位行銷", "電子商務", "消費者行為"],
+    "bio": "劉佳蒨助理教授專長於數位行銷與電子商務，在網路社群行銷領域有豐富經驗。"
+  },
+  {
+    "id": 5,
+    "name": "曾秉倫",
+    "title": "助理教授兼嘉義中心主任",
+    "photo": "images/teachers/pltseng.jpg",
+    "phone": "1501、7319",
+    "email": "pltseng@mail.nou.edu.tw",
+    "expertise": ["金融科技", "金融創新", "金融仲介理論", "財務經濟學", "產業經濟學"],
+    "bio": "曾秉倫助理教授兼嘉義中心主任，專長於金融科技與財務經濟學，致力於金融創新研究。"
+  },
+  {
+    "id": 6,
+    "name": "余建明",
+    "title": "助理教授兼綜合商業科科主任暨推廣教育處課程推廣組組長,臺南中心組長",
+    "photo": "images/teachers/cmyu.jpg",
+    "phone": "1602、7320",
+    "email": "cmyu@mail.nou.edu.tw",
+    "expertise": ["土地利用", "土地登記實務", "土地政策", "不動產投資學"],
+    "bio": "余建明助理教授兼臺南中心組長，專長於不動產投資與土地政策，對實務應用有深入瞭解。"
+  },
+  {
+    "id": 7,
+    "name": "林俊裕",
+    "title": "教授（管理與資訊學系教授兼教務長）",
+    "photo": "images/teachers/lin.jpg",
+    "phone": "5101、7612",
+    "email": "jylin@mail.nou.edu.tw",
+    "expertise": ["科技管理", "企業創新", "策略管理", "產業競爭分析"],
+    "bio": "林俊裕教授為管理與資訊學系教授兼教務長，專長於科技管理與企業創新策略。"
+  },
+  {
+    "id": 8,
+    "name": "吳政穎",
+    "title": "副教授（管理與資訊學系副教授兼教學媒體處媒體長）",
+    "photo": "images/teachers/wu.jpg",
+    "phone": "5201、7620",
+    "email": "cywu@mail.nou.edu.tw",
+    "expertise": ["財務報表分析", "財務管理", "公司理財", "管理會計"],
+    "bio": "吳政穎副教授兼教學媒體處媒體長，專長於財務管理與管理會計領域。"
+  }
+]
