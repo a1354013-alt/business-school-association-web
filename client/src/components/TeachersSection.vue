@@ -82,8 +82,29 @@ interface Teacher {
 const teachers = ref<Teacher[]>([])
 const currentSlide = ref(0)
 const autoPlayTimer = ref<number | null>(null)
-const pageSize = 4
+const pageSize = ref(4)
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+// 根據視窗寬度動態計算 pageSize
+const calculatePageSize = () => {
+  const width = window.innerWidth
+  if (width < 640) {
+    // 手機 (< 640px)
+    return 1
+  } else if (width < 1024) {
+    // 平板 (640px - 1024px)
+    return 2
+  } else {
+    // 桌面 (> 1024px)
+    return 4
+  }
+}
+
+const updatePageSize = () => {
+  pageSize.value = calculatePageSize()
+  // 重置到第一頁，避免超出範圍
+  currentSlide.value = 0
+}
 
 const emit = defineEmits<{
   selectTeacher: [teacher: Teacher]
@@ -92,8 +113,8 @@ const emit = defineEmits<{
 // 動態分頁邏輯
 const slides = computed(() => {
   const result: Teacher[][] = []
-  for (let i = 0; i < teachers.value.length; i += pageSize) {
-    result.push(teachers.value.slice(i, i + pageSize))
+  for (let i = 0; i < teachers.value.length; i += pageSize.value) {
+    result.push(teachers.value.slice(i, i + pageSize.value))
   }
   return result.length > 0 ? result : [[]]
 })
@@ -153,12 +174,19 @@ const restartAutoPlay = () => {
 }
 
 onMounted(async () => {
+  // 初始化 pageSize
+  pageSize.value = calculatePageSize()
   await loadTeachers()
   startAutoPlay()
+  
+  // 監聽視窗大小變化
+  window.addEventListener('resize', updatePageSize)
 })
 
 onUnmounted(() => {
   if (autoPlayTimer.value) clearInterval(autoPlayTimer.value)
+  // 移除事件監聽
+  window.removeEventListener('resize', updatePageSize)
 })
 </script>
 
