@@ -39,7 +39,8 @@ const photos = ref<Photo[]>([
   { src: '/DSC00003.jpg', title: '103年04月27日文化之旅', description: '達觀風情泰雅文化之旅，深化校外聯誼。' },
   { src: '/DSC00004.jpg', title: '103年03月23日第二次面授', description: '中庭義賣咖啡、社團幹部會議與會員互動。' },
   { src: '/DSC00001.jpg', title: '102年12月22日理財講座', description: '活動與學習並進，延續商學系實務導向精神。' },
-  { src: '/DSC00006.jpg', title: '1月13日古典詩詞吟唱', description: '保留舊站活動記錄，重新以卡片式方式呈現。' }
+  { src: '/DSC00006.jpg', title: '1月13日古典詩詞吟唱', description: '保留舊站活動記錄，重新以卡片式方式呈現。' },
+  { src: '/DSC00007.jpg', title: '開學典禮與社團幹部團聚照', description: '新學年開始，社團幹部齊聚一堂，共同為系學會的發展努力。' }
 ])
 
 const handleImageError = (event: Event) => {
