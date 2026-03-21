@@ -34,8 +34,8 @@ interface Photo {
 }
 
 const photos = ref<Photo[]>([
-  { src: '/DSC00001.jpg', title: '103年06月08日第四次面授', description: '舉辦 103 學年學生代表選舉。' },
-  { src: '/DSC00002.jpg', title: '103年05月04日第三次面授', description: '舉辦會員大會，延續社團運作與交流。' },
+  { src: '/DSC00001.jpg', title: '103年06月08日第四次面授', description: '面授課程進行，師生互動交流，深化學習成效。' },
+  { src: '/DSC00002.jpg', title: '103年05月04日第三次面授', description: '舉辦 103 學年學生代表選舉。' },
   { src: '/DSC00003.jpg', title: '103年04月27日文化之旅', description: '達觀風情泰雅文化之旅，深化校外聯誼。' },
   { src: '/DSC00004.jpg', title: '103年03月23日第二次面授', description: '中庭義賣咖啡、社團幹部會議與會員互動。' },
   { src: '/DSC00001.jpg', title: '102年12月22日理財講座', description: '活動與學習並進，延續商學系實務導向精神。' },
