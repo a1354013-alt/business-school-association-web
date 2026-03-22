@@ -91,7 +91,7 @@ useReveal('.reveal')
   transition: all 0.6s ease;
 }
 
-.reveal.revealed {
+.reveal.show {
   opacity: 1;
   transform: translateY(0);
 }
