@@ -27,35 +27,7 @@
         </div>
       </div>
 
-      <!-- Stats Section -->
-      <div class="mt-16 grid gap-12 lg:grid-cols-2 lg:gap-8 items-center">
-        <!-- Stats Grid -->
-        <div class="grid grid-cols-2 gap-4">
-          <div class="card reveal p-6 sm:p-8 text-center">
-            <div class="text-3xl sm:text-4xl font-extrabold text-blue-600 mb-2">8+</div>
-            <p class="text-sm font-semibold text-slate-600">專任教師</p>
-            <p class="text-xs text-slate-500 mt-1">商學領域專家陣容</p>
-          </div>
-          <div class="card reveal p-6 sm:p-8 text-center">
-            <div class="text-3xl sm:text-4xl font-extrabold text-blue-600 mb-2">多元</div>
-            <p class="text-sm font-semibold text-slate-600">課程規劃</p>
-            <p class="text-xs text-slate-500 mt-1">涵蓋經濟、管理、金融領域</p>
-          </div>
-          <div class="card reveal p-6 sm:p-8 text-center">
-            <div class="text-3xl sm:text-4xl font-extrabold text-blue-600 mb-2">全國</div>
-            <p class="text-sm font-semibold text-slate-600">學習中心</p>
-            <p class="text-xs text-slate-500 mt-1">遍佈全台提供在地服務</p>
-          </div>
-          <div class="card reveal p-6 sm:p-8 text-center">
-            <div class="text-3xl sm:text-4xl font-extrabold text-blue-600 mb-2">開放</div>
-            <p class="text-sm font-semibold text-slate-600">教育理念</p>
-            <p class="text-xs text-slate-500 mt-1">提供終身學習機會</p>
-          </div>
-        </div>
 
-        <!-- Empty space for balance -->
-        <div></div>
-      </div>
     </div>
   </section>
 </template>
@@ -69,20 +41,6 @@ useReveal('.reveal')
 <style scoped>
 .hero-bg {
   background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 50%, #1e3a8a 100%);
-}
-
-.card {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 1.25rem;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-}
-
-.card:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
-  transform: translateY(-4px);
 }
 
 .reveal {
