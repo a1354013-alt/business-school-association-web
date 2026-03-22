@@ -73,7 +73,7 @@ const photos = ref<Photo[]>([
   { src: '/DSC00001.jpg', title: '103年06月08日第四次面授', description: '面授課程進行，師生互動交流，深化學習成效。' },
   { src: '/DSC00002.jpg', title: '103年05月04日第三次面授', description: '舉辦 103 學年學生代表選舉。' },
   { src: '/DSC00003.jpg', title: '中庭義賣咖啡', description: '義賣咖啡活動，師生齊心協力，溫暖校園。' },
-  { src: '/DSC00004.jpg', title: '103年03月23日第二次面授', description: '中庭義賣咖啡、社團幹部會議與會員互動。' },
+  { src: '/DSC00004.jpg', title: '社服活動關懷獨居老人', description: '社服關懷獨居老人，師生共同傳遞溫暖與關愛。' },
   { src: '/DSC00009.jpg', title: '"文學創意"演講', description: '文學創意演講，激發學生創意思維與文化涵養。' },
   { src: '/DSC00006.jpg', title: '1月13日古典詩詞吟唱', description: '保留舊站活動記錄，重新以卡片式方式呈現。' },
   { src: '/DSC00007.jpg', title: '開學典禮與社團幹部團聚照', description: '新學年開始，社團幹部齊聚一堂，共同為系學會的發展努力。' },
