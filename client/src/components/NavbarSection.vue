@@ -1,22 +1,22 @@
 <template>
   <nav class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex h-16 items-center justify-between">
-        <!-- Logo -->
-        <a href="#" class="flex items-center gap-2 font-extrabold text-slate-900">
-          <img src="/logo.svg" alt="商學系系學會 LOGO" class="h-10 w-10 object-contain" />
-          <span class="hidden sm:inline text-sm">商學系系學會</span>
+    <div class="mx-auto max-w-7xl px-8">
+      <div class="flex h-[72px] items-center justify-between">
+        <!-- Logo & Brand -->
+        <a href="#" class="flex items-center gap-3">
+          <img src="/logo.svg" alt="商學系系學會 LOGO" class="h-11 w-11 object-contain" />
+          <span class="hidden sm:inline text-base font-bold text-slate-900">商學系系學會</span>
         </a>
 
         <!-- Desktop Navigation -->
         <div class="hidden md:flex items-center gap-8">
-          <a href="#about" class="nav-link text-sm font-medium text-slate-600 hover:text-blue-600 transition">本會簡介</a>
-          <a href="#faculty" class="nav-link text-sm font-medium text-slate-600 hover:text-blue-600 transition">師資陣容</a>
-          <a href="#team" class="nav-link text-sm font-medium text-slate-600 hover:text-blue-600 transition">服務團隊</a>
-          <a href="#events" class="nav-link text-sm font-medium text-slate-600 hover:text-blue-600 transition">活動訊息</a>
-          <a href="#gallery" class="nav-link text-sm font-medium text-slate-600 hover:text-blue-600 transition">活動花絮</a>
-          <a href="#constitution" class="nav-link text-sm font-medium text-slate-600 hover:text-blue-600 transition">組織章程</a>
-          <a href="#join" class="nav-link text-sm font-medium text-slate-600 hover:text-blue-600 transition">加入商學會</a>
+          <a href="#about" class="nav-link text-sm font-medium text-slate-600 relative pb-2 hover:text-slate-900 transition">本會簡介</a>
+          <a href="#faculty" class="nav-link text-sm font-medium text-slate-600 relative pb-2 hover:text-slate-900 transition">師資陣容</a>
+          <a href="#team" class="nav-link text-sm font-medium text-slate-600 relative pb-2 hover:text-slate-900 transition">服務團隊</a>
+          <a href="#events" class="nav-link text-sm font-medium text-slate-600 relative pb-2 hover:text-slate-900 transition">活動訊息</a>
+          <a href="#gallery" class="nav-link text-sm font-medium text-slate-600 relative pb-2 hover:text-slate-900 transition">活動花絮</a>
+          <a href="#constitution" class="nav-link text-sm font-medium text-slate-600 relative pb-2 hover:text-slate-900 transition">組織章程</a>
+          <a href="#join" class="nav-link text-sm font-medium text-slate-600 relative pb-2 hover:text-slate-900 transition">加入商學會</a>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -59,5 +59,18 @@ const closeMobileMenu = () => {
 </script>
 
 <style scoped>
-/* No additional styles needed - using Tailwind utilities */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #a3d5ff;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
 </style>
