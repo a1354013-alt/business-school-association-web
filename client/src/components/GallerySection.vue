@@ -22,7 +22,10 @@
       </div>
 
       <!-- Gallery Carousel -->
-      <div class="overflow-hidden rounded-3xl bg-white p-6">
+      <div 
+        class="overflow-hidden rounded-3xl bg-white p-6 touch-pan-y"
+        @touchstart="handleTouchStart"
+        @touchend="handleTouchEnd">
         <div class="gallery-track" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
           <div v-for="(slide, idx) in slides" :key="idx" class="gallery-slide" :style="{ gridTemplateColumns: `repeat(${cardsPerPage}, 1fr)` }">
             <article
@@ -139,6 +142,32 @@ const goToSlide = (idx: number) => {
 const handleImageError = (event: Event) => {
   const img = event.target as HTMLImageElement
   img.outerHTML = '<div class="w-full h-48 bg-blue-100 flex items-center justify-center text-blue-600"><i class="fas fa-image text-3xl"></i></div>'
+}
+
+// 觸摸事件處理
+let touchStartX = 0
+let touchEndX = 0
+
+const handleTouchStart = (event: TouchEvent) => {
+  touchStartX = event.changedTouches[0].screenX
+}
+
+const handleTouchEnd = (event: TouchEvent) => {
+  touchEndX = event.changedTouches[0].screenX
+  handleSwipe()
+}
+
+const handleSwipe = () => {
+  const swipeThreshold = 50
+  const diff = touchStartX - touchEndX
+  
+  if (Math.abs(diff) > swipeThreshold) {
+    if (diff > 0) {
+      nextSlide()
+    } else {
+      prevSlide()
+    }
+  }
 }
 
 const startAutoPlay = () => {
