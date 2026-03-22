@@ -72,10 +72,9 @@ interface Photo {
 const photos = ref<Photo[]>([
   { src: '/DSC00001.jpg', title: '103年06月08日第四次面授', description: '面授課程進行，師生互動交流，深化學習成效。' },
   { src: '/DSC00002.jpg', title: '103年05月04日第三次面授', description: '舉辦 103 學年學生代表選舉。' },
-  { src: '/DSC00003.jpg', title: '103年04月27日文化之旅', description: '達觀風情泰雅文化之旅，深化校外聯誼。' },
+  { src: '/DSC00003.jpg', title: '中庭義賣咖啡', description: '義賣咖啡募集經費，師生互動凝聚情誼。' },
   { src: '/DSC00004.jpg', title: '103年03月23日第二次面授', description: '中庭義賣咖啡、社團幹部會議與會員互動。' },
   { src: '/DSC00009.jpg', title: '"文學創意"演講', description: '文學創意演講，激發學生創意思維與文化涵養。' },
-  { src: '/DSC00010.jpg', title: '"記憶學"講座', description: '記憶學講座，傳授有效的學習記憶技巧與方法。' },
   { src: '/DSC00006.jpg', title: '1月13日古典詩詞吟唱', description: '保留舊站活動記錄，重新以卡片式方式呈現。' },
   { src: '/DSC00007.jpg', title: '開學典禮與社團幹部團聚照', description: '新學年開始，社團幹部齊聚一堂，共同為系學會的發展努力。' },
   { src: '/DSC00008.jpg', title: '達觀風情泰雅文化之旅', description: '山林探訪泰雅文化，師生互動深化校園情誼。' }
