@@ -187,15 +187,14 @@ onUnmounted(() => {
 
 .gallery-track {
   display: flex;
-  gap: 2rem;
   transition: transform 0.5s ease-in-out;
 }
 
 .gallery-slide {
-  min-width: calc(100% + 2rem);
+  min-width: 100%;
   display: grid;
   gap: 2rem;
-  padding: 0;
+  padding: 0 1rem;
   flex-shrink: 0;
 }
 
