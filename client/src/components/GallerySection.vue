@@ -103,9 +103,13 @@ const calculateCardsPerPage = () => {
 const cardsPerPage = ref(typeof window !== 'undefined' ? calculateCardsPerPage() : 3)
 
 const updateCardsPerPage = () => {
-  cardsPerPage.value = calculateCardsPerPage()
-  // 重置到第一頁，避免超出範圍
-  currentSlide.value = 0
+  const newCardsPerPage = calculateCardsPerPage()
+  // 只在平板和桌面版本上更新，手機版本固定為 1
+  if (window.innerWidth >= 640) {
+    cardsPerPage.value = newCardsPerPage
+    // 重置到第一頁，避免超出範圍
+    currentSlide.value = 0
+  }
 }
 
 // 動態分頁邏輯
