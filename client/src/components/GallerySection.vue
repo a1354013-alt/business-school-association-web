@@ -194,8 +194,20 @@ onUnmounted(() => {
   min-width: 100%;
   display: grid;
   gap: 2rem;
-  padding: 0 1rem;
+  padding: 0 0.5rem;
   flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+  .gallery-slide {
+    padding: 0 0.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery-slide {
+    padding: 0 1rem;
+  }
 }
 
 .card {
