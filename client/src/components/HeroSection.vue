@@ -1,8 +1,5 @@
 <template>
   <section class="hero-bg relative overflow-hidden py-24 sm:py-32 lg:py-48 text-white">
-    <!-- Decorative background elements -->
-    <div class="absolute top-10 right-10 w-96 h-96 rounded-full opacity-5 bg-white blur-3xl"></div>
-    <div class="absolute bottom-0 left-20 w-80 h-80 rounded-full opacity-5 bg-white blur-3xl"></div>
     
     <div class="mx-auto max-w-6xl px-16">
       <div class="grid gap-16 lg:grid-cols-2 lg:gap-12 items-center">
@@ -14,7 +11,7 @@
           </div>
           
           <!-- Main Title -->
-          <h1 class="text-5xl lg:text-6xl font-extrabold leading-tight mb-8">
+          <h1 class="text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
             國立空中大學<br />商學系系學會
           </h1>
           
@@ -62,7 +59,10 @@ useReveal('.reveal')
 
 <style scoped>
 .hero-bg {
-  background: linear-gradient(135deg, #0f2fae 0%, #315ff4 100%);
+  background:
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.08), transparent 60%),
+    radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.06), transparent 60%),
+    linear-gradient(135deg, #0f2fae 0%, #1f3fd6 45%, #315ff4 100%);
   position: relative;
 }
 
