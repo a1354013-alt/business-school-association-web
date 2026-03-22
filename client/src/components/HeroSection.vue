@@ -17,7 +17,19 @@
           </a>
         </div>
 
-        <!-- Right Stats -->
+        <!-- Right Image -->
+        <div class="reveal rounded-3xl overflow-hidden shadow-2xl">
+          <img 
+            src="/hero-team.jpg" 
+            alt="商學系系學會團隊合照" 
+            class="w-full h-full object-cover"
+            loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Stats Section -->
+      <div class="mt-16 grid gap-12 lg:grid-cols-2 lg:gap-8 items-center">
+        <!-- Stats Grid -->
         <div class="grid grid-cols-2 gap-4">
           <div class="card reveal p-6 sm:p-8 text-center">
             <div class="text-3xl sm:text-4xl font-extrabold text-blue-600 mb-2">8+</div>
@@ -40,6 +52,9 @@
             <p class="text-xs text-slate-500 mt-1">提供終身學習機會</p>
           </div>
         </div>
+
+        <!-- Empty space for balance -->
+        <div></div>
       </div>
     </div>
   </section>
