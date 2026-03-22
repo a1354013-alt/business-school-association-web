@@ -72,7 +72,7 @@ interface Photo {
 const photos = ref<Photo[]>([
   { src: '/DSC00001.jpg', title: '103年06月08日第四次面授', description: '面授課程進行，師生互動交流，深化學習成效。' },
   { src: '/DSC00002.jpg', title: '103年05月04日第三次面授', description: '舉辦 103 學年學生代表選舉。' },
-  { src: '/DSC00003.jpg', title: '中庭義賣咖啡', description: '義賣咖啡募集經費，師生互動凝聚情誼。' },
+  { src: '/DSC00003.jpg', title: '中庭義賣咖啡', description: '義賣咖啡活動，師生齊心協力，溫暖校園。' },
   { src: '/DSC00004.jpg', title: '103年03月23日第二次面授', description: '中庭義賣咖啡、社團幹部會議與會員互動。' },
   { src: '/DSC00009.jpg', title: '"文學創意"演講', description: '文學創意演講，激發學生創意思維與文化涵養。' },
   { src: '/DSC00006.jpg', title: '1月13日古典詩詞吟唱', description: '保留舊站活動記錄，重新以卡片式方式呈現。' },
