@@ -22,9 +22,9 @@
       </div>
 
       <!-- Gallery Carousel -->
-      <div class="overflow-hidden rounded-3xl bg-white p-4">
+      <div class="overflow-hidden rounded-3xl bg-white p-6">
         <div class="gallery-track" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
-          <div v-for="(slide, idx) in slides" :key="idx" class="gallery-slide">
+          <div v-for="(slide, idx) in slides" :key="idx" class="gallery-slide" :style="{ gridTemplateColumns: `repeat(${cardsPerPage}, 1fr)` }">
             <article
               v-for="(photo, photoIdx) in slide"
               :key="photoIdx"
@@ -193,8 +193,7 @@ onUnmounted(() => {
 .gallery-slide {
   min-width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  gap: 2rem;
   padding: 0;
 }
 
