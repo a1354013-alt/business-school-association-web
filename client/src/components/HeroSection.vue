@@ -5,11 +5,6 @@
       <div class="grid gap-16 lg:grid-cols-2 lg:gap-12 items-center">
         <!-- Left Content -->
         <div>
-          <!-- Badge -->
-          <div class="inline-block mb-6 px-4 py-2 bg-white bg-opacity-15 rounded-3xl border border-white border-opacity-20">
-            <p class="text-xs font-semibold uppercase tracking-widest text-white">商學系系學會</p>
-          </div>
-          
           <!-- Main Title -->
           <h1 class="text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
             國立空中大學<br />商學系系學會
