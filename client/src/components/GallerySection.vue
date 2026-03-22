@@ -82,7 +82,6 @@ const photos = ref<Photo[]>([
 
 const currentSlide = ref(0)
 const autoPlayTimer = ref<number | null>(null)
-const cardsPerPage = ref(3)
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 // 根據視窗寬度動態計算 cardsPerPage
@@ -99,6 +98,9 @@ const calculateCardsPerPage = () => {
     return 3
   }
 }
+
+// 初始化 cardsPerPage，確保在首次加載時就能正確設置
+const cardsPerPage = ref(typeof window !== 'undefined' ? calculateCardsPerPage() : 3)
 
 const updateCardsPerPage = () => {
   cardsPerPage.value = calculateCardsPerPage()
