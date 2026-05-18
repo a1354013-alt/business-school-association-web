@@ -37,14 +37,14 @@
           :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
         >
           <div
-            v-for="(slide, idx) in slides"
+            v-for="(slide, idx) in pagedPhotos"
             :key="idx"
             class="gallery-slide"
             :style="{ gridTemplateColumns: `repeat(${cardsPerPage}, 1fr)` }"
           >
             <article
-              v-for="photo in slide"
-              :key="photo.src"
+              v-for="(photo, photoIdx) in slide"
+              :key="`${photo.src}-${photoIdx}`"
               class="card reveal overflow-hidden"
             >
               <img
@@ -75,7 +75,7 @@
 
       <div class="mt-5 flex items-center justify-center gap-3">
         <button
-          v-for="(_, idx) in slides"
+          v-for="(_, idx) in pagedPhotos"
           :key="idx"
           type="button"
           class="dot"
@@ -166,38 +166,57 @@ const calculateCardsPerPage = () => {
   return 3;
 };
 
-const slides = computed(() => {
-  const result: Photo[][] = [];
-  for (
-    let index = 0;
-    index < photos.value.length;
-    index += cardsPerPage.value
-  ) {
-    result.push(photos.value.slice(index, index + cardsPerPage.value));
+const pageCount = computed(() => {
+  if (photos.value.length === 0) {
+    return 1;
   }
-  return result.length > 0 ? result : [[]];
+
+  return Math.ceil(photos.value.length / cardsPerPage.value);
+});
+
+const pagedPhotos = computed(() => {
+  if (photos.value.length === 0) {
+    return [[]];
+  }
+
+  return Array.from({ length: pageCount.value }, (_, pageIndex) => {
+    const startIndex = pageIndex * cardsPerPage.value;
+
+    return Array.from({ length: cardsPerPage.value }, (_, cardIndex) => {
+      const photoIndex = (startIndex + cardIndex) % photos.value.length;
+      return photos.value[photoIndex];
+    });
+  });
 });
 
 const clampCurrentSlide = () => {
-  const maxSlideIndex = Math.max(slides.value.length - 1, 0);
+  const maxSlideIndex = Math.max(pageCount.value - 1, 0);
   if (currentSlide.value > maxSlideIndex) {
     currentSlide.value = maxSlideIndex;
   }
 };
 
 const updateCardsPerPage = () => {
-  cardsPerPage.value = calculateCardsPerPage();
+  const nextCardsPerPage = calculateCardsPerPage();
+
+  if (nextCardsPerPage === cardsPerPage.value) {
+    clampCurrentSlide();
+    return;
+  }
+
+  cardsPerPage.value = nextCardsPerPage;
   clampCurrentSlide();
+  startAutoPlay();
 };
 
 const prevSlide = () => {
   currentSlide.value =
-    (currentSlide.value - 1 + slides.value.length) % slides.value.length;
+    (currentSlide.value - 1 + pageCount.value) % pageCount.value;
   restartAutoPlay();
 };
 
 const nextSlide = () => {
-  currentSlide.value = (currentSlide.value + 1) % slides.value.length;
+  currentSlide.value = (currentSlide.value + 1) % pageCount.value;
   restartAutoPlay();
 };
 
@@ -243,12 +262,12 @@ const stopAutoPlay = () => {
 const startAutoPlay = () => {
   stopAutoPlay();
 
-  if (prefersReducedMotion() || slides.value.length <= 1) {
+  if (prefersReducedMotion() || pageCount.value <= 1) {
     return;
   }
 
   autoPlayTimer.value = window.setInterval(() => {
-    currentSlide.value = (currentSlide.value + 1) % slides.value.length;
+    currentSlide.value = (currentSlide.value + 1) % pageCount.value;
   }, 5000);
 };
 
