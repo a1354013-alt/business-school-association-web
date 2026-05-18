@@ -1,47 +1,64 @@
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted } from "vue";
 
-export function useReveal(selector: string = '.reveal') {
-  let observer: IntersectionObserver | null = null
+export function useReveal(selector = ".reveal") {
+  let observer: IntersectionObserver | null = null;
+
+  const showElements = () => {
+    if (typeof document === "undefined") {
+      return;
+    }
+
+    document.querySelectorAll(selector).forEach(element => {
+      element.classList.add("show");
+    });
+  };
 
   const initObserver = () => {
-    // Check for prefers-reduced-motion
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (typeof window === "undefined" || typeof document === "undefined") {
+      return;
+    }
+
+    const reduceMotion = window.matchMedia?.(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    const supportsIntersectionObserver = "IntersectionObserver" in window;
+
+    if (reduceMotion || !supportsIntersectionObserver) {
+      showElements();
+      return;
+    }
 
     observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('show')
-            observer?.unobserve(entry.target)
+      entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) {
+            return;
           }
-        })
+
+          entry.target.classList.add("show");
+          observer?.unobserve(entry.target);
+        });
       },
       { threshold: 0.1 }
-    )
+    );
 
-    const elements = document.querySelectorAll(selector)
-    if (!reduceMotion && 'IntersectionObserver' in window) {
-      elements.forEach((el) => observer?.observe(el))
-    } else {
-      // If reduced motion or no IntersectionObserver support, show immediately
-      elements.forEach((el) => el.classList.add('show'))
-    }
-  }
+    document.querySelectorAll(selector).forEach(element => {
+      observer?.observe(element);
+    });
+  };
 
   const cleanup = () => {
-    if (observer) {
-      observer.disconnect()
-      observer = null
-    }
-  }
+    observer?.disconnect();
+    observer = null;
+  };
 
   onMounted(() => {
-    initObserver()
-  })
+    initObserver();
+  });
 
   onUnmounted(() => {
-    cleanup()
-  })
+    cleanup();
+  });
 
-  return { initObserver, cleanup }
+  return { initObserver, cleanup };
 }

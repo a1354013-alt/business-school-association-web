@@ -1,55 +1,80 @@
 <template>
-  <section id="faculty" class="py-20 bg-white">
+  <section id="faculty" class="bg-white py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="card reveal p-6 sm:p-8">
         <div class="mb-5 flex items-center justify-between gap-4">
           <div>
-            <p class="text-sm font-bold uppercase tracking-[0.18em] text-blue-700">Faculty Carousel</p>
-            <h3 class="mt-2 text-2xl font-extrabold text-slate-900">教師與學術領域展示</h3>
+            <p
+              class="text-sm font-bold uppercase tracking-[0.18em] text-blue-700"
+            >
+              Faculty Carousel
+            </p>
+            <h3 class="mt-2 text-2xl font-extrabold text-slate-900">
+              教師陣容
+            </h3>
           </div>
           <div class="hidden gap-2 sm:flex">
             <button
-              @click="prevSlide"
               type="button"
-              class="focus-ring inline-flex h-11 w-11 items-center justify-center rounded-full bg-blue-600 text-white hover:bg-blue-700 transition"
-              aria-label="上一頁教師資料">
+              class="focus-ring inline-flex h-11 w-11 items-center justify-center rounded-full bg-blue-600 text-white transition hover:bg-blue-700"
+              aria-label="上一組教師"
+              @click="prevSlide"
+            >
               <i class="fas fa-chevron-left" aria-hidden="true"></i>
             </button>
             <button
-              @click="nextSlide"
               type="button"
-              class="focus-ring inline-flex h-11 w-11 items-center justify-center rounded-full bg-blue-600 text-white hover:bg-blue-700 transition"
-              aria-label="下一頁教師資料">
+              class="focus-ring inline-flex h-11 w-11 items-center justify-center rounded-full bg-blue-600 text-white transition hover:bg-blue-700"
+              aria-label="下一組教師"
+              @click="nextSlide"
+            >
               <i class="fas fa-chevron-right" aria-hidden="true"></i>
             </button>
           </div>
         </div>
 
-        <!-- Carousel -->
         <div class="overflow-hidden rounded-3xl bg-slate-50 p-4">
-          <div class="teacher-track" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
-            <div v-for="(slide, idx) in slides" :key="idx" class="teacher-slide">
+          <div
+            class="teacher-track"
+            :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
+          >
+            <div
+              v-for="(slide, idx) in slides"
+              :key="idx"
+              class="teacher-slide"
+            >
               <article
                 v-for="teacher in slide"
                 :key="teacher.id"
-                class="card teacher-card p-6 text-center cursor-pointer"
-                @click="selectTeacher(teacher)">
+                class="card teacher-card cursor-pointer p-6 text-center"
+                @click="selectTeacher(teacher)"
+              >
                 <div class="teacher-photo">
                   <img
+                    v-if="!failedImages.has(teacher.id)"
                     :src="teacher.photo"
-                    :alt="`${teacher.name}老師照片`"
-                    class="w-24 h-24 rounded-full mx-auto object-cover"
+                    :alt="`${teacher.name} 教師照片`"
+                    class="mx-auto h-24 w-24 rounded-full object-cover"
                     loading="lazy"
-                    @error="handleImageError" />
+                    @error="handleImageError(teacher.id)"
+                  />
+                  <div
+                    v-else
+                    class="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-blue-100 text-blue-600"
+                    aria-hidden="true"
+                  >
+                    <i class="fas fa-user-tie text-2xl"></i>
+                  </div>
                 </div>
-                <h4 class="font-extrabold text-slate-900 mt-4">{{ teacher.name }}</h4>
-                <p class="mt-1 text-sm text-slate-500">{{ teacher.title.split('兼')[0] }}</p>
+                <h4 class="mt-4 font-extrabold text-slate-900">
+                  {{ teacher.name }}
+                </h4>
+                <p class="mt-1 text-sm text-slate-500">{{ teacher.title }}</p>
               </article>
             </div>
           </div>
         </div>
 
-        <!-- Dots -->
         <div class="mt-5 flex items-center justify-center gap-3">
           <button
             v-for="(_, idx) in slides"
@@ -57,8 +82,9 @@
             type="button"
             class="dot"
             :class="{ active: idx === currentSlide }"
-            :aria-label="`切換到第 ${idx + 1} 頁`"
-            @click="goToSlide(idx)"></button>
+            :aria-label="`切換到第 ${idx + 1} 組教師`"
+            @click="goToSlide(idx)"
+          ></button>
         </div>
       </div>
     </div>
@@ -66,128 +92,144 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from "vue";
+import { publicPath } from "@/utils/publicPath";
 
 interface Teacher {
-  id: number
-  name: string
-  title: string
-  photo: string
-  email: string
-  phone: string
-  expertise: string[]
-  bio: string
-}
-
-const teachers = ref<Teacher[]>([])
-const currentSlide = ref(0)
-const autoPlayTimer = ref<number | null>(null)
-const pageSize = ref(4)
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-// 根據視窗寬度動態計算 pageSize
-const calculatePageSize = () => {
-  const width = window.innerWidth
-  if (width < 640) {
-    // 手機 (< 640px)
-    return 1
-  } else if (width < 1024) {
-    // 平板 (640px - 1024px)
-    return 2
-  } else {
-    // 桌面 (> 1024px)
-    return 4
-  }
-}
-
-const updatePageSize = () => {
-  pageSize.value = calculatePageSize()
-  // 重置到第一頁，避免超出範圍
-  currentSlide.value = 0
+  id: number;
+  name: string;
+  title: string;
+  photo: string;
+  email: string;
+  phone: string;
+  expertise: string[];
+  bio: string;
 }
 
 const emit = defineEmits<{
-  selectTeacher: [teacher: Teacher]
-}>()
+  selectTeacher: [teacher: Teacher];
+}>();
 
-// 動態分頁邏輯
-const slides = computed(() => {
-  const result: Teacher[][] = []
-  for (let i = 0; i < teachers.value.length; i += pageSize.value) {
-    result.push(teachers.value.slice(i, i + pageSize.value))
+const teachers = ref<Teacher[]>([]);
+const currentSlide = ref(0);
+const autoPlayTimer = ref<number | null>(null);
+const pageSize = ref(4);
+const failedImages = ref(new Set<number>());
+
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
+const calculatePageSize = () => {
+  if (typeof window === "undefined") {
+    return 4;
   }
-  return result.length > 0 ? result : [[]]
-})
+
+  const width = window.innerWidth;
+  if (width < 640) {
+    return 1;
+  }
+  if (width < 1024) {
+    return 2;
+  }
+  return 4;
+};
+
+const slides = computed(() => {
+  const result: Teacher[][] = [];
+  for (let index = 0; index < teachers.value.length; index += pageSize.value) {
+    result.push(teachers.value.slice(index, index + pageSize.value));
+  }
+  return result.length > 0 ? result : [[]];
+});
+
+const clampCurrentSlide = () => {
+  const maxSlideIndex = Math.max(slides.value.length - 1, 0);
+  if (currentSlide.value > maxSlideIndex) {
+    currentSlide.value = maxSlideIndex;
+  }
+};
+
+const updatePageSize = () => {
+  pageSize.value = calculatePageSize();
+  clampCurrentSlide();
+};
 
 const loadTeachers = async () => {
-  try {
-    const response = await fetch('/teachers.json')
-    
-    if (!response.ok) {
-      throw new Error(`Failed to load teachers: ${response.status} ${response.statusText}`)
-    }
-    
-    const text = await response.text()
-    const data = JSON.parse(text)
-    teachers.value = data
-  } catch (error) {
-    if (import.meta.env.DEV) {
-      console.error('[TeachersSection] Error loading teachers:', error)
-    }
+  const response = await fetch(publicPath("teachers.json"));
+
+  if (!response.ok) {
+    throw new Error(
+      `Failed to load teachers: ${response.status} ${response.statusText}`
+    );
   }
-}
+
+  const data = (await response.json()) as Teacher[];
+  teachers.value = data.map(teacher => ({
+    ...teacher,
+    photo: publicPath(teacher.photo),
+  }));
+  clampCurrentSlide();
+};
 
 const prevSlide = () => {
-  currentSlide.value = (currentSlide.value - 1 + slides.value.length) % slides.value.length
-  restartAutoPlay()
-}
+  currentSlide.value =
+    (currentSlide.value - 1 + slides.value.length) % slides.value.length;
+  restartAutoPlay();
+};
 
 const nextSlide = () => {
-  currentSlide.value = (currentSlide.value + 1) % slides.value.length
-  restartAutoPlay()
-}
+  currentSlide.value = (currentSlide.value + 1) % slides.value.length;
+  restartAutoPlay();
+};
 
 const goToSlide = (idx: number) => {
-  currentSlide.value = idx
-  restartAutoPlay()
-}
+  currentSlide.value = idx;
+  restartAutoPlay();
+};
 
 const selectTeacher = (teacher: Teacher) => {
-  emit('selectTeacher', teacher)
-}
+  emit("selectTeacher", teacher);
+};
 
-const handleImageError = (event: Event) => {
-  const img = event.target as HTMLImageElement
-  img.outerHTML = '<div class="w-24 h-24 rounded-full mx-auto bg-blue-100 flex items-center justify-center text-blue-600"><i class="fas fa-user-tie text-2xl"></i></div>'
-}
+const handleImageError = (teacherId: number) => {
+  failedImages.value = new Set(failedImages.value).add(teacherId);
+};
+
+const stopAutoPlay = () => {
+  if (autoPlayTimer.value !== null) {
+    window.clearInterval(autoPlayTimer.value);
+    autoPlayTimer.value = null;
+  }
+};
 
 const startAutoPlay = () => {
-  if (reduceMotion || slides.value.length <= 1) return
+  stopAutoPlay();
+
+  if (prefersReducedMotion() || slides.value.length <= 1) {
+    return;
+  }
+
   autoPlayTimer.value = window.setInterval(() => {
-    currentSlide.value = (currentSlide.value + 1) % slides.value.length
-  }, 4500)
-}
+    currentSlide.value = (currentSlide.value + 1) % slides.value.length;
+  }, 4500);
+};
 
 const restartAutoPlay = () => {
-  if (autoPlayTimer.value) clearInterval(autoPlayTimer.value)
-  startAutoPlay()
-}
+  startAutoPlay();
+};
 
 onMounted(async () => {
-  // 初始化 pageSize
-  pageSize.value = calculatePageSize()
-  await loadTeachers()
-  startAutoPlay()
-  
-  // 監聽視窗大小變化
-  window.addEventListener('resize', updatePageSize)
-})
+  pageSize.value = calculatePageSize();
+  await loadTeachers();
+  startAutoPlay();
+  window.addEventListener("resize", updatePageSize);
+});
 
 onUnmounted(() => {
-  if (autoPlayTimer.value) clearInterval(autoPlayTimer.value)
-  // 移除事件監聽
-  window.removeEventListener('resize', updatePageSize)
-})
+  stopAutoPlay();
+  window.removeEventListener("resize", updatePageSize);
+});
 </script>
 
 <style scoped>
@@ -196,7 +238,9 @@ onUnmounted(() => {
   border: 1px solid #e2e8f0;
   border-radius: 1.25rem;
   box-shadow: 0 10px 28px rgba(15, 23, 42, 0.07);
-  transition: transform .25s ease, box-shadow .25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .card:hover {
