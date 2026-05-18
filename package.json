@@ -10,7 +10,10 @@
     "check": "vue-tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "ci": "npm run format:check && npm run check && npm run build"
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "ci": "pnpm format:check && pnpm check && pnpm test:run && pnpm build"
   },
   "dependencies": {
     "vue": "^3.4.21"
@@ -20,13 +23,18 @@
     "@types/node": "^24.7.0",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/language-server": "^3.2.6",
+    "@vue/test-utils": "^2.4.10",
     "autoprefixer": "^10.4.20",
+    "happy-dom": "^20.9.0",
+    "jsdom": "^29.1.1",
     "postcss": "^8.4.47",
     "prettier": "^3.6.2",
     "tailwindcss": "^4.1.14",
     "tsx": "^4.19.1",
     "typescript": "5.6.3",
     "vite": "^5.4.0",
+    "vite-plugin-manus-runtime": "^0.0.57",
+    "vitest": "^2.1.8",
     "vue-tsc": "^2.2.12"
   },
   "packageManager": "pnpm@10.4.1+sha512.c753b6c3ad7afa13af388fa6d808035a008e30ea9993f58c6663e2bc5ff21679aa834db094987129aa4d488b86df57f7b634981b2f827cdcacc698cc0cfb88af",

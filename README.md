@@ -1,66 +1,126 @@
-# Business School Association Web
+# Business School Vue
 
-國立空中大學商學系系學會網站，提供系學會介紹、教師資料、活動資訊與活動花絮展示。
+A modern business school showcase website built with Vue 3 + Vite + TypeScript + Tailwind CSS.
 
-## 技術棧
+## 🚀 Tech Stack
 
-- Vue 3
-- Vite
-- TypeScript
-- Tailwind CSS
+- **Framework**: Vue 3.4.21
+- **Build Tool**: Vite 5.4.0
+- **Language**: TypeScript 5.6.3
+- **Styling**: Tailwind CSS 4.1.14
+- **Package Manager**: pnpm
 
-## 安裝方式
+## 📦 Project Structure
 
-```bash
-npm install
+```
+├── client/                     # Frontend source code
+│   ├── public/                 # Static assets
+│   │   ├── images/             # Image assets directory
+│   │   ├── __manus__/          # Manus runtime files
+│   │   ├── *.jpg/*.png/*.jpeg  # Gallery images
+│   │   ├── hero-team.jpg       # Hero section image
+│   │   ├── logo.svg            # School logo
+│   │   └── teachers.json       # Teacher data
+│   ├── index.html              # HTML entry point
+│   └── src/                    # Source code
+│       ├── components/         # Vue components
+│       │   ├── NavbarSection.vue
+│       │   ├── HeroSection.vue
+│       │   ├── AboutSection.vue
+│       │   ├── TeachersSection.vue
+│       │   ├── TeacherModal.vue
+│       │   ├── TeamSection.vue
+│       │   ├── EventsSection.vue
+│       │   ├── GallerySection.vue
+│       │   ├── ConstitutionSection.vue
+│       │   ├── JoinSection.vue
+│       │   └── SiteFooter.vue
+│       ├── composables/        # Composable functions
+│       │   └── useReveal.ts    # Scroll reveal animation
+│       ├── App.vue             # Root component
+│       ├── main.ts             # Application entry point
+│       ├── env.d.ts            # TypeScript environment declarations
+│       └── index.css           # Global styles with Tailwind
+├── .prettierrc                 # Prettier configuration
+├── .prettierignore             # Prettier ignore rules
+├── package.json                # Project dependencies and scripts
+├── pnpm-lock.yaml              # pnpm lock file
+├── tsconfig.json               # TypeScript configuration
+├── tsconfig.node.json          # TypeScript Node configuration
+├── vite.config.ts              # Vite configuration
+└── README.md                   # Project documentation
 ```
 
-## 開發啟動
+## 🛠️ Development Guide
+
+### Requirements
+
+- Node.js >= 18.x
+- pnpm >= 10.x
+
+### Install Dependencies
 
 ```bash
-npm run dev
+pnpm install
 ```
 
-預設會以 Vite 開發伺服器啟動，可透過瀏覽器開啟終端輸出的本機網址。
-
-## 型別檢查
+### Start the Development Server
 
 ```bash
-npm run check
+pnpm dev
 ```
 
-此指令使用 `vue-tsc --noEmit` 驗證 Vue SFC 與 TypeScript 型別。
+Visit `http://localhost:5173` to preview the application.
 
-## 格式檢查
+### Build for Production
 
 ```bash
-npm run format
-npm run format:check
+pnpm build
 ```
 
-## 建置與預覽
+### Preview the Production Build
 
 ```bash
-npm run build
-npm run preview
+pnpm preview
 ```
 
-正式建置輸出於 `dist/public`。
-
-## 靜態資源與 `teachers.json` 維護方式
-
-- 所有 public 靜態資源放在 `client/public/`。
-- 程式中如果要引用 public 資源，請使用 `client/src/utils/publicPath.ts` 的 `publicPath()` 組路徑，不要直接寫 `/logo.svg`、`/teachers.json` 這類根目錄絕對路徑。
-- `teachers.json` 位於 `client/public/teachers.json`。
-- `teachers.json` 內的 `photo` 欄位請維持相對於 `client/public/` 的路徑，例如 `images/teachers/fangchen.jpg`。載入時會由前端透過 `publicPath()` 自動補上 `BASE_URL`。
-
-## 部署注意事項
-
-- 本專案使用 Vite，若部署到 GitHub Pages 或任何子路徑站台，必須確認 Vite `base` 設定與部署路徑一致。
-- 前端程式碼不得直接依賴 `/xxx` 根目錄資源路徑，否則在子路徑部署時會 404。
-- 目前所有 public 資源與 `teachers.json` 請統一透過 `publicPath()` 取得，避免 base path 問題。
-- 建議部署前先執行：
+### Code Checks
 
 ```bash
-npm run ci
+# TypeScript type checking
+pnpm check
+
+# Code formatting
+pnpm format
 ```
+
+## 🎨 Features
+
+- **Navigation Bar** (`NavbarSection`) - Responsive top navigation menu with smooth scroll links
+- **Hero Section** (`HeroSection`) - Eye-catching homepage banner with call-to-action
+- **About Us** (`AboutSection`) - School introduction and mission statement
+- **Faculty Team** (`TeachersSection`) - Interactive faculty showcase with profile cards
+- **Teacher Modal** (`TeacherModal`) - Detailed teacher information popup with contact details and expertise
+- **Team Highlights** (`TeamSection`) - Student team and leadership showcase
+- **Upcoming Events** (`EventsSection`) - Event calendar and announcements
+- **Photo Gallery** (`GallerySection`) - Responsive image gallery with school photos
+- **Rules & Regulations** (`ConstitutionSection`) - School constitution and bylaws
+- **Join Us** (`JoinSection`) - Admissions and recruitment information
+- **Footer** (`SiteFooter`) - Contact information and quick links
+
+## 📝 Code Style
+
+This project uses **Prettier** for consistent code formatting. Configuration files:
+- `.prettierrc` - Prettier rules
+- `.prettierignore` - Files to exclude from formatting
+
+Before committing code, please run:
+
+```bash
+pnpm format
+pnpm check
+```
+
+## 📄 License
+
+MIT License
